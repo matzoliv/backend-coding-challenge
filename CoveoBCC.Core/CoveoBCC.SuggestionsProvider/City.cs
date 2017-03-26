@@ -18,5 +18,17 @@ namespace CoveoBCC.Core
             this.Latitude = Latitude;
             this.Longitude = Longitude;
         }
+
+        public static City FromTabbedSeparatedLine(string line)
+        {
+            var fields = line.Split( '\t' );
+
+            return
+                new City(
+                    Name: fields[ 1 ],
+                    Latitude: Double.Parse( fields[ 4 ] ),
+                    Longitude: Double.Parse( fields[ 5 ] )
+                );
+        }
     }
 }

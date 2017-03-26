@@ -28,15 +28,7 @@ namespace CoveoBCC.Core
 
                     while ( !streamReader.EndOfStream )
                     {
-                        var fields = streamReader.ReadLine().Split( '\t' );
-
-                        m_cities.Add(
-                            new City(
-                                Name: fields[1],
-                                Latitude: Double.Parse(fields[4]),
-                                Longitude: Double.Parse(fields[5])
-                            )
-                        );
+                        m_cities.Add( City.FromTabbedSeparatedLine( streamReader.ReadLine() ) );
                     }
                 }
             }

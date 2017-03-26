@@ -12,6 +12,7 @@
     <AssemblyName>CoveoBCC.Azure</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>CoveoBCC.Azure</Name>
+    <PackageEnableRemoteDebugger>False</PackageEnableRemoteDebugger>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
