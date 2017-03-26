@@ -1,0 +1,16 @@
+* Google searched "Levenshtein distance autocompletion"
+* BK-Trees http://blog.notdot.net/2007/4/Damn-Cool-Algorithms-Part-1-BK-Trees
+* Levenshtein Automata http://blog.notdot.net/2010/07/Damn-Cool-Algorithms-Levenshtein-Automata
+* Damerau¡VLevenshtein distance
+* Other distance algorithms http://www.joyofdata.de/blog/comparison-of-string-distance-algorithms/
+
+* Levenshtein distance algorithm from :
+  http://people.cs.pitt.edu/~kirk/cs1501/Pruhs/Spring2006/assignments/editdistance/Levenshtein%20Distance.htm
+
+* How to handle multiple words ?
+  Trie on words composing a sentence
+* Longest common subsequence ?
+* Suffix tree ?
+  
+* Expand multiple possible queries & look for them in the "sentence trie"
+
