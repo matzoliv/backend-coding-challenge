@@ -36,7 +36,7 @@ namespace CoveoBCC.Web
 
             {
                 double temp;
-                if ( Double.TryParse( latitude, out temp ) && temp >= 0.0 )
+                if ( Double.TryParse( latitude, out temp ) )
                 {
                     latitudeDouble = temp;
                 }
@@ -44,7 +44,7 @@ namespace CoveoBCC.Web
 
             {
                 double temp;
-                if ( Double.TryParse( longitude, out temp ) && temp >= 0.0 )
+                if ( Double.TryParse( longitude, out temp ) )
                 {
                     longitudeDouble = temp;
                 }

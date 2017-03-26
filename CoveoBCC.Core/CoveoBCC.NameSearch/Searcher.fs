@@ -40,14 +40,14 @@ module Searcher =
             Seq.concat <|
                 [
                     x.WordsIndex.GetWordsStartingWith word
-                    |> Seq.map (fun (distance, word) -> ((float distance) / 0.33, word))
+                    |> Seq.map (fun (distance, word) -> ((float distance) / 5.0, word))
 
                     x.FuzzyIndex.GetCloserThan word 2
                     |> Seq.sortBy fst
                     |> Seq.map (fun (distance, word) -> ((float distance) , word))
                 ]
 
-        member x.GetPossibleQueries (s: string) =
+        member x.GetPossibleQueries (s: string) : (float * string)[] seq =
             let tokens = tokenize s
             seq {
                 let wordSequences = 
@@ -60,7 +60,7 @@ module Searcher =
                 let enums = wordSequences |> Array.map (fun xs -> xs.GetEnumerator())
                 let enums = enums |> Array.filter (fun e -> e.MoveNext()) |> Array.mapi (fun i e -> (i, e))
 
-                let currentWords = ref (enums |> Array.map (fun (i, e) -> e.Current) |> Array.map snd)
+                let currentWords = ref (enums |> Array.map (fun (i, e) -> e.Current))
                 if (!currentWords).Length > 0 then
                     yield !currentWords
 
@@ -69,7 +69,7 @@ module Searcher =
                 while (!candidates).Length > 0 do
                     let (index, e) = !candidates |> Seq.minBy (fun (i, e) -> fst <| e.Current )
                     let newWords = Array.copy !currentWords
-                    newWords.[index] <- e.Current |> snd
+                    newWords.[index] <- e.Current
                     yield newWords
                     if not <| e.MoveNext() then
                         candidates := (!candidates) |> Array.filter (fun (_, thisE) -> e <> thisE)
@@ -78,11 +78,13 @@ module Searcher =
             |> Seq.map ( fun words -> Array.append words.[1..(words.Length - 1)] [| words.[0] |]  )
 
         interface INameIndexQuerier with
-            member x.Lookup (s: string) =
+            member this.Lookup (s: string) =
                 seq {
-                    for query in x.GetPossibleQueries s do
-                        yield! (x.SentencesIndex.GetMatching query |> Seq.map (fun s -> LookupResult(s, float32 1.0)))
-                }
+                    for query in this.GetPossibleQueries s do
+                        let matches = this.SentencesIndex.GetMatching (query |> Seq.map snd)
+                        let distance = query |> Seq.sumBy fst
+                        yield! (matches |> Seq.map (fun s -> LookupResult(s, distance)))
+                } |> Seq.distinctBy (fun x -> x.Result)
 
     type NameSearcherFactory () =
         interface INameIndexFactory with

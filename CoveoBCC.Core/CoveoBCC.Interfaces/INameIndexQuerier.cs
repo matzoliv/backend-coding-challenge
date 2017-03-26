@@ -6,9 +6,9 @@ namespace CoveoBCC.Interfaces
     public class LookupResult
     {
         public string Result { get; }
-        public float Distance { get; }
+        public double Distance { get; }
 
-        public LookupResult ( string Result, float Distance )
+        public LookupResult ( string Result, double Distance )
         {
             this.Result = Result;
             this.Distance = Distance;

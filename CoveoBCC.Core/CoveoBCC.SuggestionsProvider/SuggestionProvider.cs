@@ -7,12 +7,12 @@ using CoveoBCC.Interfaces;
 
 namespace CoveoBCC.Core
 {
-    public class Core : ISuggestionsProvider
+    public class SuggestionProvider : ISuggestionsProvider
     {
         private readonly INameIndexQuerier m_nameIndexQuerier;
         private readonly Dictionary<string, List<City>> m_store;
 
-        public Core (
+        public SuggestionProvider (
             ICityRepository cityRepository,
             INameIndexFactory nameIndexFactory
         )
@@ -34,17 +34,18 @@ namespace CoveoBCC.Core
 
         public IEnumerable<Suggestion> GetSuggestions ( string nameQuery, int limit, double? latitude = default( double? ), double? longitude = default( double? ) )
         {
-            var matches =
+            return
                 m_nameIndexQuerier.Lookup( nameQuery )
                     .Where( x => m_store.ContainsKey( x.Result ) )
-                    .SelectMany( x => m_store[ x.Result ] )
+                    .SelectMany( x => m_store[ x.Result ].Select( c => new CityWithNameDistance( City: c, Distance: x.Distance ) ) )
                     .Take( limit )
-                    .ToList();
-
-            return matches.Select(
-                x => new Suggestion( Label: x.Name, Score: 1.0, Location: new Location( x.Latitude, x.Longitude ) )
-            );
-
+                    .ApplyScoring( latitude, longitude )
+                    .Select(
+                        x => new Suggestion( Label: $"{x.City.Name} ({x.City.CountryCode})", Score: x.Score, Location: new Location( x.City.Latitude, x.City.Longitude ) )
+                    )
+                    .OrderByDescending( x => x.Score );
         }
+
+
     }
 }

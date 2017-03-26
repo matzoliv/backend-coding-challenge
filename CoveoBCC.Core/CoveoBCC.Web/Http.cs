@@ -21,7 +21,7 @@ namespace CoveoBCC.Web
             container.RegisterType<INameIndexFactory, CoveoBCC.Core.Searcher.NameSearcherFactory>( new ContainerControlledLifetimeManager() );
             // container.RegisterType<ICityRepository, FileCityRepository>( new ContainerControlledLifetimeManager() );
             container.RegisterType<ICityRepository, AzureStorageCityRepository>( new ContainerControlledLifetimeManager() );
-            container.RegisterType<ISuggestionsProvider, CoveoBCC.Core.Core>( new ContainerControlledLifetimeManager() ); ;
+            container.RegisterType<ISuggestionsProvider, CoveoBCC.Core.SuggestionProvider>( new ContainerControlledLifetimeManager() ); ;
             container.RegisterInstance<string>( "CitiesTSVFile", @"C:\Users\matzoliv\dev\backend-coding-challenge\data\cities_canada-usa.tsv" );
         }
 

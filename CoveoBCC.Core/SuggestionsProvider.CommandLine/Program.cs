@@ -14,7 +14,7 @@ namespace SuggestionsProvider.CommandLine
         {
             var cityRepository = new FileCityRepository( @"C:\Users\matzoliv\dev\backend-coding-challenge\cities_canada-usa-big.tsv" );
 
-            var suggestionProvider = new Core( cityRepository, new CoveoBCC.Core.Searcher.NameSearcherFactory() );
+            var suggestionProvider = new SuggestionProvider( cityRepository, new CoveoBCC.Core.Searcher.NameSearcherFactory() );
 
             var xs = suggestionProvider.GetSuggestions( "west c", 20 ).ToList();
         }

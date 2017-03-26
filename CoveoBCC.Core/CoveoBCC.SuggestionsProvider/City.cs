@@ -11,12 +11,14 @@ namespace CoveoBCC.Core
         public string Name { get; }
         public double Latitude { get; }
         public double Longitude { get; }
+        public string CountryCode { get; }
 
-        public City ( string Name, double Latitude, double Longitude )
+        public City ( string Name, double Latitude, double Longitude, string CountryCode )
         {
             this.Name = Name;
             this.Latitude = Latitude;
             this.Longitude = Longitude;
+            this.CountryCode = CountryCode;
         }
 
         public static City FromTabbedSeparatedLine(string line)
@@ -27,7 +29,8 @@ namespace CoveoBCC.Core
                 new City(
                     Name: fields[ 1 ],
                     Latitude: Double.Parse( fields[ 4 ] ),
-                    Longitude: Double.Parse( fields[ 5 ] )
+                    Longitude: Double.Parse( fields[ 5 ] ),
+                    CountryCode: fields[8]
                 );
         }
     }

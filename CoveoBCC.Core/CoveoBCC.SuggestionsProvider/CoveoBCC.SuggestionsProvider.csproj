@@ -58,7 +58,8 @@
   <ItemGroup>
     <Compile Include="City.cs" />
     <Compile Include="FileCityRepository.cs" />
-    <Compile Include="Core.cs" />
+    <Compile Include="ScoringStrategy.cs" />
+    <Compile Include="SuggestionProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
