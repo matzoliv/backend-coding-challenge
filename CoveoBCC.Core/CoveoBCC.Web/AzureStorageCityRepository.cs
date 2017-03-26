@@ -13,9 +13,7 @@ namespace CoveoBCC.Core
 
         public AzureStorageCityRepository()
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                "DefaultEndpointsProtocol=https;AccountName=citiesmatzoliv85762;AccountKey=NZ02HTV4q8vhL6UZYL67+42MK556qQC17nuaKTEBduQqJWpOs1Swesrqc+Nap0REdfcjrSdPGwkA1tY2HTM5Lw==;EndpointSuffix=core.windows.net"
-            );
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse( @"" );
 
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             var blobContainer = blobClient.GetContainerReference( "cities-big" );
