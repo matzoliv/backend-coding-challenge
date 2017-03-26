@@ -13,3 +13,15 @@
     - to be able to look for a series of word inside of each full city name, I build multiple tries for all suffixes.
       For example for the city "Mont Saint Hilaire", I insert "Mont Saint Hilaire" into trie 0, then "Saint Hilaire" into trie 1, then
       "Hilaire" into trie 2
+
+## Suggestion and scoring
+- The city name database is held in memory along with the name search indexes
+- I first do a lookup in the name search component and take the first 20 results along with their distances (the distance of the result is set to be the distance of the inferred candidate query during the name search process)
+- If only a latitude is given, I add to the result distance the difference between the city's latitude and the given one
+- If only a longitude is given, I add to the result distance the difference between the city's longitude and the given one
+- If both a latitude and longitude are given, I add to the result distance the distance between the point formed by the city's (longitude, latitude) and the given (longitude, latitude)
+- I map all the distances of the results to a value between 1.0 and 0.0 (lower is better a this point)
+- Then I reverse the score to get the proper "higher is better" result
+
+## Hosting
+- I use Azure Cloud Service with OWIN to implement the HTTP API
