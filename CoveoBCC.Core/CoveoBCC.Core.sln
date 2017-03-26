@@ -3,14 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CoveoBCC.Core", "CoveoBCC.Core\CoveoBCC.Core.fsproj", "{39280400-9726-461D-B98C-85C019556725}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CoveoBCC.NameSearch", "CoveoBCC.NameSearch\CoveoBCC.NameSearch.fsproj", "{39280400-9726-461D-B98C-85C019556725}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoveoBCC.Core.Tests", "CoveoBCC.Core.Tests\CoveoBCC.Core.Tests.csproj", "{518A5DF8-01D1-4F73-9B99-008EB336A664}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoveoBCC.Tests", "CoveoBCC.Tests\CoveoBCC.Tests.csproj", "{518A5DF8-01D1-4F73-9B99-008EB336A664}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C200616B-E5E7-4EC6-B1F0-2B9D2EBAF7EE}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoveoBCC.Interfaces", "CoveoBCC.Interfaces\CoveoBCC.Interfaces.csproj", "{4C1014A3-6FAA-4A94-9BC4-B77DD8166767}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoveoBCC.SuggestionsProvider", "CoveoBCC.SuggestionsProvider\CoveoBCC.SuggestionsProvider.csproj", "{A5BB1ACF-25ED-4C2E-A39E-58CB742807DE}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "CoveoBCC.Azure", "CoveoBCC.Azure\CoveoBCC.Azure.ccproj", "{6EE87F52-643B-4E97-9AC5-7592BCE869A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoveoBCC.Web", "CoveoBCC.Web\CoveoBCC.Web.csproj", "{8A744DDE-EC7A-4F9F-8152-1DFD25C19113}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuggestionsProvider.CommandLine", "SuggestionsProvider.CommandLine\SuggestionsProvider.CommandLine.csproj", "{084FAD1E-D932-41B9-B185-9DF6BAEAD925}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +36,26 @@ Global
 		{518A5DF8-01D1-4F73-9B99-008EB336A664}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{518A5DF8-01D1-4F73-9B99-008EB336A664}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{518A5DF8-01D1-4F73-9B99-008EB336A664}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C1014A3-6FAA-4A94-9BC4-B77DD8166767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1014A3-6FAA-4A94-9BC4-B77DD8166767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1014A3-6FAA-4A94-9BC4-B77DD8166767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1014A3-6FAA-4A94-9BC4-B77DD8166767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BB1ACF-25ED-4C2E-A39E-58CB742807DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BB1ACF-25ED-4C2E-A39E-58CB742807DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BB1ACF-25ED-4C2E-A39E-58CB742807DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BB1ACF-25ED-4C2E-A39E-58CB742807DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EE87F52-643B-4E97-9AC5-7592BCE869A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EE87F52-643B-4E97-9AC5-7592BCE869A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EE87F52-643B-4E97-9AC5-7592BCE869A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EE87F52-643B-4E97-9AC5-7592BCE869A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A744DDE-EC7A-4F9F-8152-1DFD25C19113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A744DDE-EC7A-4F9F-8152-1DFD25C19113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A744DDE-EC7A-4F9F-8152-1DFD25C19113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A744DDE-EC7A-4F9F-8152-1DFD25C19113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{084FAD1E-D932-41B9-B185-9DF6BAEAD925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{084FAD1E-D932-41B9-B185-9DF6BAEAD925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{084FAD1E-D932-41B9-B185-9DF6BAEAD925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{084FAD1E-D932-41B9-B185-9DF6BAEAD925}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

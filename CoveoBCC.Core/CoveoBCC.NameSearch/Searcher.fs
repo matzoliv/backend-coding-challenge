@@ -2,6 +2,7 @@
 
 open System.Text.RegularExpressions
 open System.Diagnostics
+open CoveoBCC.Interfaces
 
 module Searcher =
     let sanitizeRegex = new Regex(@"[()',.\-""]", RegexOptions.Compiled);
@@ -26,14 +27,6 @@ module Searcher =
             FuzzyIndex = BKTree.Root.Empty
             SentencesIndex = SentenceTrie.SuffixTree.Empty
         }
-
-        member x.LoadFrom (streamReader: System.IO.StreamReader) =
-            while not streamReader.EndOfStream do
-                let line = streamReader.ReadLine()
-                let tokens = tokenize line
-                tokens |> Seq.iter x.WordsIndex.Insert 
-                tokens |> Seq.iter x.FuzzyIndex.Insert
-                x.SentencesIndex.Insert line tokens
 
         // Lazily iterates 
         member x.GetInnerWordCandidates (word: string) = 
@@ -88,6 +81,20 @@ module Searcher =
             member x.Lookup (s: string) =
                 seq {
                     for query in x.GetPossibleQueries s do
-                        yield! x.SentencesIndex.GetMatching query
+                        yield! (x.SentencesIndex.GetMatching query |> Seq.map (fun s -> LookupResult(s, float32 1.0)))
                 }
 
+    type NameSearcherFactory () =
+        interface INameIndexFactory with
+            member x.BuildFrom (ss: string seq) =
+                let index = Implementation.Empty
+                ss |> Seq.iter (
+                    fun s ->
+                        let tokens = tokenize s
+                        tokens |> Seq.iter index.WordsIndex.Insert 
+                        tokens |> Seq.iter index.FuzzyIndex.Insert
+                        index.SentencesIndex.Insert s tokens
+                )
+
+                index :> INameIndexQuerier
+    

@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CoveoBCC.Core.Tests</RootNamespace>
-    <AssemblyName>CoveoBCC.Core.Tests</AssemblyName>
+    <AssemblyName>CoveoBCC.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -58,9 +58,9 @@
     <Compile Include="DataStructures.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoveoBCC.Core\CoveoBCC.Core.fsproj">
+    <ProjectReference Include="..\CoveoBCC.NameSearch\CoveoBCC.NameSearch.fsproj">
       <Project>{39280400-9726-461d-b98c-85c019556725}</Project>
-      <Name>CoveoBCC.Core</Name>
+      <Name>CoveoBCC.NameSearch</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

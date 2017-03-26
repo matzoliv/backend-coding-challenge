@@ -8,11 +8,11 @@
     <ProjectGuid>39280400-9726-461d-b98c-85c019556725</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CoveoBCC.Core</RootNamespace>
-    <AssemblyName>CoveoBCC.Core</AssemblyName>
+    <AssemblyName>CoveoBCC.NameSearch</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>CoveoBCC.Core</Name>
+    <Name>CoveoBCC.NameSearch</Name>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -50,11 +50,17 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Levenshtein.fs" />
     <None Include="Script.fsx" />
-    <Compile Include="Interfaces.fs" />
     <Compile Include="BKTree.fs" />
     <Compile Include="WordTrie.fs" />
     <Compile Include="SentenceTrie.fs" />
     <Compile Include="Searcher.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoveoBCC.Interfaces\CoveoBCC.Interfaces.csproj">
+      <Name>CoveoBCC.Interfaces</Name>
+      <Project>{4c1014a3-6faa-4a94-9bc4-b77dd8166767}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
