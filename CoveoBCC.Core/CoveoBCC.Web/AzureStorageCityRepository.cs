@@ -17,7 +17,7 @@ namespace CoveoBCC.Core
 
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             var blobContainer = blobClient.GetContainerReference( "cities-big" );
-            var blob = blobContainer.GetBlobReference( "cities_canada-usa.tsv" );
+            var blob = blobContainer.GetBlobReference( "cities_canada-usa.tsv.gz" );
 
             var memoryStream = new MemoryStream();
             blob.DownloadToStream( memoryStream );
@@ -26,13 +26,16 @@ namespace CoveoBCC.Core
 
             m_cities = new List<City>();
 
-            using ( var streamReader = new System.IO.StreamReader( memoryStream ) )
+            using ( GZipStream decompressionStream = new GZipStream( memoryStream, CompressionMode.Decompress ) )
             {
-                streamReader.ReadLine();
-
-                while ( !streamReader.EndOfStream )
+                using ( var streamReader = new System.IO.StreamReader( decompressionStream ) )
                 {
-                    m_cities.Add( City.FromTabbedSeparatedLine( streamReader.ReadLine() ) );
+                    streamReader.ReadLine();
+
+                    while ( !streamReader.EndOfStream )
+                    {
+                        m_cities.Add( City.FromTabbedSeparatedLine( streamReader.ReadLine() ) );
+                    }
                 }
             }
         }

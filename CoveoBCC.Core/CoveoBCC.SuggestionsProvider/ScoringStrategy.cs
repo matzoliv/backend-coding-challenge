@@ -58,20 +58,27 @@ namespace CoveoBCC.Core
                 cities
                     .Select( x => new { City = x.City, Score = x.Distance + getDistance( new Location( x.City.Latitude, x.City.Longitude ) ) } );
 
-            var max = scoredMatches.Select( x => x.Score ).Max();
-            var min = scoredMatches.Select( x => x.Score ).Min();
-
-            if ( max > min )
+            if ( scoredMatches.Any() )
             {
-                return
-                    scoredMatches
-                        .Select( x => new CityWithFinalScore( City: x.City, Score: 1.0 - ( ( x.Score - min ) / ( max - min ) ) ) );
+                var max = scoredMatches.Select( x => x.Score ).Max();
+                var min = scoredMatches.Select( x => x.Score ).Min();
+
+                if ( max > min )
+                {
+                    return
+                        scoredMatches
+                            .Select( x => new CityWithFinalScore( City: x.City, Score: 1.0 - ( ( x.Score - min ) / ( max - min ) ) ) );
+                }
+                else
+                {
+                    return
+                        scoredMatches
+                            .Select( x => new CityWithFinalScore( City: x.City, Score: 1.0 ) );
+                }
             }
             else
             {
-                return
-                    scoredMatches
-                        .Select( x => new CityWithFinalScore( City: x.City, Score: 1.0 ) );
+                return Enumerable.Empty<CityWithFinalScore>();
             }
         }
 
