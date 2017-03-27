@@ -4,13 +4,13 @@
 # Quick implementation overview
 
 ## Name search (CoveoBCC.NameSearch)
-- The query is first sanitized by lowering the case and removing special characters
+- The query is first sanitized by lowering case and removing special characters
 - Each word of the query is then assigned a stream of possible word candidates, each candidate having a distance score associated
-    - The stream for the each word of the query except the last one is produced from a BKTree filled with all words in the database using the Levenshtein distance
-    - The first part of the stream for the last word is produced from a trie all words in the database. The last part of the stream is using the same BKTree as the other words. Basically, I assume that the user is more interested in autocompleting the last word than trying to correct a typo on it.
+    - The stream for each word of the query _except the last one_ is produced from all words in the database with a Levenshtein distance lesser than 2. This is computed efficiently using a BKTree.
+    - The first part of the stream _for the last word_ is composed of all words for which the last word of the query is a prefix. This is computed efficiently from a trie of all words in the database. The second part of the stream produced the same way as other words (levenshtein distance lesser that two). Basically, I assume that the user is more interested in autocompleting the last word than trying to correct a typo on it.
 - Then I generate a stream of candidate queries (series of words) in order of distance (the distance of the query being the sum of all the distance of each words in the query)
 - Then I lookup each series of words in multiple "sentence tries" (tries built from the words of the full city name instead of each characters)
-    - to be able to look for a series of word inside of each full city name, I build multiple tries for all suffixes.
+    - To be able to look for a series of word inside of each full city name, I build multiple tries for all suffixes.
       For example for the city "Mont Saint Hilaire", I insert "Mont Saint Hilaire" into trie 0, then "Saint Hilaire" into trie 1, then
       "Hilaire" into trie 2
 
@@ -25,3 +25,4 @@
 
 ## Hosting
 - I use Azure Cloud Service with OWIN to implement the HTTP API
+- The database is read before handling the first request from an Azure storage account
